@@ -10,7 +10,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_02_Selenium_Commands {
+public class Topic_02_Locator_In_Selenium {
 	WebDriver driver;
 
 	@BeforeClass
