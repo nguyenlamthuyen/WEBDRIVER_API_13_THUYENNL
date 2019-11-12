@@ -1,5 +1,6 @@
 package webdriver_api;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -13,9 +14,9 @@ import org.testng.annotations.Test;
 
 public class Topic_03_Xpath_Part_I_Ex {
 	WebDriver driver;
-	String firstName = "Automation";
-	String lastName = "Testing";
-	String validEmail = "automation@gmail.com";
+	String firstName = "Selenium";
+	String lastName = "Advanced";
+	String validEmail = "automation" + randomNumber() + "@gmail.com";
 	String validPassword = "123123";
 
 	@BeforeClass(description = "Chạy trước cho tất cả các test bên dưới")
@@ -32,7 +33,7 @@ public class Topic_03_Xpath_Part_I_Ex {
 		driver.findElement(By.xpath("//div[@class='footer']//a[contains(text(),'My Account')]")).click();
 	}
 
-	/* @Test */
+	@Test  
 	public void TC_01_LoginWithEmailAndPasswordEmpty() {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("");
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("");
@@ -45,7 +46,7 @@ public class Topic_03_Xpath_Part_I_Ex {
 		Assert.assertEquals(passwordErrorMsg, "This is a required field.");
 	}
 
-	/* @Test */
+	@Test 
 	public void TC_02_LoginWithEmailInvalid() {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("123434234@12312.123123");
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("");
@@ -58,7 +59,7 @@ public class Topic_03_Xpath_Part_I_Ex {
 		Assert.assertEquals(passwordErrorMsg, "This is a required field.");	
 	}
 	
-	/* @Test */
+	@Test  
 	public void TC_03_LoginWithPasswordLessThan6Chars() {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("automation@gmail.com");
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("12345");
@@ -68,7 +69,7 @@ public class Topic_03_Xpath_Part_I_Ex {
 		Assert.assertEquals(passwordErrorMsg, "Please enter 6 or more characters without leading or trailing spaces.");	
 	}
 	
-	 @Test 
+	@Test  
 	public void TC_04_LoginWithPasswordIncorrect() {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("automation@gmail.com");
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("123456");
@@ -78,16 +79,38 @@ public class Topic_03_Xpath_Part_I_Ex {
 		Assert.assertEquals(errorMsg, "Invalid login or password.");		
 	}
 	
-	/* @Test */
-	public void TC_05_LoginWithValidEmailAndPassword() {
+	@Test 
+	public void TC_05_CreateNewAccount() {
+		driver.findElement(By.xpath("//a[@class='button']")).click();		
+		
+		driver.findElement(By.xpath("//input[@id='firstname']")).sendKeys(firstName);
+		driver.findElement(By.xpath("//input[@id='lastname']")).sendKeys(lastName);
+		driver.findElement(By.xpath("//input[@id='email_address']")).sendKeys(validEmail);
+		driver.findElement(By.xpath("//input[@id='password']")).sendKeys(validPassword);
+		driver.findElement(By.xpath("//input[@id='confirmation']")).sendKeys(validPassword);
+		
+		driver.findElement(By.xpath("//button[@title=\"Register\"]")).click();
+		
+		Assert.assertTrue(driver.findElement(By.xpath("//span[contains(text(),'registering with')]")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//h1[text()='My Dashboard']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//strong[text()='Hello, " + firstName + " " + lastName + "!']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='box-content']/p[contains(text(),'" + firstName + " " + lastName + "')]")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='box-content']/p[contains(.,'" + validEmail + "')]")).isDisplayed());	
+		
+		driver.findElement(By.xpath("//div[@class='account-cart-wrapper']//span[text()='Account']")).click();
+		driver.findElement(By.xpath("//a[text()='Log Out']")).click();
+	}
+	
+	@Test 
+	public void TC_06_LoginWithValidEmailAndPassword() {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys(validEmail);
 		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys(validPassword);
 		driver.findElement(By.xpath("//button[@id='send2']")).click();
-		
 		// Cách 1: Dùng hàm assertTrue(điều kiện) -> locator được hiển thị (isDisplayed)
 		Assert.assertTrue(driver.findElement(By.xpath("//h1[text()='My Dashboard']")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//strong[text()='Hello, " + firstName + " " + lastName + "!']")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='box-content']/p[contains(text(),'" + firstName + " " + lastName + "')]")).isDisplayed());
+		
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='box-content']/p[contains(.,'" + validEmail + "')]")).isDisplayed());
 		
 		// Cách 2: Dùng hàm assertEquals(điều kiện 1, điều kiện 2) -> getText() - actual result/ expected result		
@@ -97,6 +120,12 @@ public class Topic_03_Xpath_Part_I_Ex {
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
+	}
+	
+	public int randomNumber() {
+		 Random rand = new Random();
+		 int n = rand.nextInt(50);
+		 return n;
 	}
 
 }
