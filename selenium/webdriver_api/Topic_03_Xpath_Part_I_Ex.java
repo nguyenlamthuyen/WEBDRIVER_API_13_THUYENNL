@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
@@ -81,6 +82,9 @@ public class Topic_03_Xpath_Part_I_Ex {
 	
 	@Test 
 	public void TC_05_CreateNewAccount() {
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("scroll(1000,1000);");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.findElement(By.xpath("//a[@class='button']")).click();		
 		
 		driver.findElement(By.xpath("//input[@id='firstname']")).sendKeys(firstName);
@@ -88,10 +92,11 @@ public class Topic_03_Xpath_Part_I_Ex {
 		driver.findElement(By.xpath("//input[@id='email_address']")).sendKeys(validEmail);
 		driver.findElement(By.xpath("//input[@id='password']")).sendKeys(validPassword);
 		driver.findElement(By.xpath("//input[@id='confirmation']")).sendKeys(validPassword);
+
 		
 		driver.findElement(By.xpath("//button[@title=\"Register\"]")).click();
 		
-		Assert.assertTrue(driver.findElement(By.xpath("//span[contains(text(),'registering with')]")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='success-msg']//span")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//h1[text()='My Dashboard']")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//strong[text()='Hello, " + firstName + " " + lastName + "!']")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='box-content']/p[contains(text(),'" + firstName + " " + lastName + "')]")).isDisplayed());
