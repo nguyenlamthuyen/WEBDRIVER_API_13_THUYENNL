@@ -134,7 +134,63 @@ public class Topic_04_Browser_I {
 
 	@Test
 	public void TC_02_() {
-		driver.get("");
+		// Tìm element (nhiều) vs locator là gì
+		
+		// Cách 1: Nếu như mà element này chỉ dùng 1 lần
+		driver.findElement(By.id("search")).sendKeys("Samsung");
+		
+		// Cách 2: Nếu như mà element này thao tác nhiều lần -> Khai báo biến
+		WebElement searchTextbox = driver.findElement(By.id("search"));
+
+		// Xóa dữ liệu trước khi sendkey
+		searchTextbox.clear();
+		
+		// Nhập dữ liệu vào 1 textbox/ textarea
+		searchTextbox.sendKeys("");
+		
+		// Click vào 1 element: button/ link/ radio/ checkbox/..
+		searchTextbox.click();
+		
+		// Tìm và thao tác vs 1 element: findElement
+		searchTextbox.findElement(By.id("search")).click();
+		
+		// Tìm và thao tác vs nhiều element: findElements
+		searchTextbox.findElements(By.id("search")).get(0).click();
+		
+		// 0 1 2 3 4 5 -> index
+		// A B C X Y Z -> data
+		
+		// 
+		String searchPlaceholderValue = searchTextbox.getAttribute("placeholder");
+		
+		// Test GUI: font/ size/ color/ position/ size/...  
+		String loginButtonColor = searchTextbox.getCssValue("background");
+		
+		// Build framework: Chụp hình nhúng vào Report
+		// searchTextbox.getScreenshotAs(arg0)
+	
+		WebElement searchTextbox_ = driver.findElement(By.cssSelector("#search"));
+		String searchTextboxTagname = searchTextbox_.getTagName();
+		// searchTextboxTagname = input
+		
+		// Trả về text của 1 element: link/ button/ label/...
+		String searchText = searchTextbox.getText();
+		
+		// assertTrue/ False
+		Assert.assertTrue(searchTextbox.isDisplayed());
+		Assert.assertTrue(searchTextbox.isEnabled());
+		
+		// Work vs Radio/ Checkbox
+		Assert.assertTrue(searchTextbox.isSelected());
+		
+		boolean searchTextboxStatus = searchTextbox.isSelected();
+		Assert.assertFalse(searchTextboxStatus);
+		Assert.assertEquals(searchTextboxStatus, false);
+		
+		searchTextbox.click();
+		
+		// Work vs form (login/ register) -> Tagname = form
+		searchTextbox.submit();
 		
 	}
 
