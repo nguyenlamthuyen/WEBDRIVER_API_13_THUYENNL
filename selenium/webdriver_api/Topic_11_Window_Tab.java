@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -112,20 +113,26 @@ public class Topic_11_Window_Tab {
 		switchToWindowByTitle("Kyna.vn - YouTube");
 		Assert.assertEquals(driver.getTitle(), "Kyna.vn - YouTube");
 		
-//		switchToWindowByTitle("Kyna.vn - Học online cùng chuyên gia");
-//		driver.findElement(By.xpath("//img[@alt='zalo']")).click();
-//		switchToWindowByTitle("Kyna.vn");
-//		Assert.assertEquals(driver.getTitle(), "‎Kyna.vn");
+//		switchToWindowByTitle("Kyna.vn - Học online cùng chuyên gia");	
+//		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[contains(@src,'facebook.com/kyna.vn')]")));
+//		driver.findElement(By.xpath("//a[text()='Kyna.vn']//parent::div//parent::div[@class]//preceding::a//img")).click();
+//		switchToWindowByTitle("Kyna.vn - Trang chủ | Facebook");
+//		Assert.assertEquals(driver.getTitle(), "Kyna.vn - Trang chủ | Facebook");
+		
+		switchToWindowByTitle("Kyna.vn - Học online cùng chuyên gia");
+		driver.findElement(By.xpath("//img[@alt='zalo']")).click();		
+		switchToWindowByTitle("Kyna.vn");
+		Assert.assertEquals(driver.getTitle(), "‎Kyna.vn");
 		
 //		switchToWindowByTitle("Kyna.vn - Học online cùng chuyên gia");
 //		driver.findElement(By.xpath("//img[@alt='apple-app-icon']")).click();
 //		switchToWindowByTitle("‎KYNA on the App Store");
 //		Assert.assertEquals(driver.getTitle(), "‎KYNA on the App Store");
 		
-		switchToWindowByTitle("Kyna.vn - Học online cùng chuyên gia");
-		driver.findElement(By.xpath("//img[@alt='android-app-icon']")).click();
-		switchToWindowByTitle("‎KYNA - Học online cùng chuyên gia - Apps on Google Play");
-		Assert.assertEquals(driver.getTitle(), "‎KYNA - Học online cùng chuyên gia - Apps on Google Play");
+//		switchToWindowByTitle("Kyna.vn - Học online cùng chuyên gia");
+//		driver.findElement(By.xpath("//img[@alt='android-app-icon']")).click();
+//		switchToWindowByTitle("‎KYNA - Học online cùng chuyên gia - Apps on Google Play");
+//		Assert.assertEquals(driver.getTitle(), "‎KYNA - Học online cùng chuyên gia - Apps on Google Play");
 	
 		closeAllWindowsWithoutParent(parentID);
 	}
@@ -164,7 +171,7 @@ public class Topic_11_Window_Tab {
 
 	@AfterClass
 	public void afterClass() {
-		driver.quit();
+//		driver.quit();
 	}
 
 }
