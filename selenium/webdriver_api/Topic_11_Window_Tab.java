@@ -9,6 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -22,6 +23,10 @@ public class Topic_11_Window_Tab {
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("webdriver.chrome.driver", ".\\libraries\\chromedriver.exe");
+		// Set ngôn ngữ
+//		ChromeOptions options = new ChromeOptions();
+//		options.addArguments("--lang=vi");
+//		driver = new ChromeDriver(options);
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
