@@ -1,5 +1,6 @@
 package webdriver_api;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -20,6 +21,8 @@ public class Topic_13_Upload_Files {
 	String pic02 = projectPath + "\\uploadFiles\\2.png";
 	String pic03 = projectPath + "\\uploadFiles\\3.png";
 	String pic04 = projectPath + "\\uploadFiles\\4.png";
+	
+	String chromeAutoIT = projectPath + "\\uploadAutoIT\\chrome.exe";
 
 	@BeforeClass
 	public void beforeClass() {
@@ -64,6 +67,30 @@ public class Topic_13_Upload_Files {
 		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='3.png']")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='4.png']")).isDisplayed());
 
+	}
+	
+	@Test
+	public void TC_03_AutoIT() throws IOException, InterruptedException {
+		driver.get("https://blueimp.github.io/jQuery-File-Upload/");
+		
+		WebElement uploadFile = driver.findElement(By.cssSelector(".btn-success"));
+		Thread.sleep(2000);
+		uploadFile.click();
+		
+		// Execute runtime file (.exe/ .bat/ .msi/ .sh)
+		Runtime.getRuntime().exec(new String[] { chromeAutoIT, pic01});
+		
+		driver.findElement(By.xpath("//table//button[@class='btn btn-primary start']")).click();
+		Thread.sleep(2000);
+		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='1.png']")).isDisplayed());
+	}
+	
+	@Test
+	public void TC_04_Robot() throws IOException, InterruptedException {
+		driver.get("https://blueimp.github.io/jQuery-File-Upload/");
+		
+		WebElement uploadFile = driver.findElement(By.cssSelector(".btn-success"));
+		Thread.sleep(2000);
 	}
 
 	@AfterClass
