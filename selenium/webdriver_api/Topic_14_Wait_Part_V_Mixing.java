@@ -31,17 +31,18 @@ public class Topic_14_Wait_Part_V_Mixing {
 	public void TC_01_Found_Element() {
 		driver.get("http://demo.guru99.com/");
 
-		//Implicit
+		// Implicit
 		System.out.println("---- STEP 01 Start TC_01_Found_Element: " + new Date() + " ---- ");
 		try {
 			WebElement emailTextbox = driver.findElement(By.xpath("//input[@name='emailid']"));
 			Assert.assertTrue(emailTextbox.isDisplayed());
-		} catch (NoSuchElementException ex) {
+		} catch (Exception ex) {
 			System.out.println("Switch to catch exception");
+			ex.printStackTrace();
 		}
 		System.out.println("---- STEP 01 End TC_01_Found_Element: " + new Date() + " ---- ");
-		
-		//Explicit
+
+		// Explicit
 		System.out.println("---- STEP 02 Start TC_01_Found_Element: " + new Date() + " ---- ");
 		try {
 			explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='btnLogin']")));
@@ -54,46 +55,48 @@ public class Topic_14_Wait_Part_V_Mixing {
 	@Test
 	public void TC_02_Not_Found_Element() {
 		// Explicit Wait (Element Status)
-		explicitWait = new WebDriverWait(driver, 10);
+		explicitWait = new WebDriverWait(driver, 7);
 
 		// Implicit Wait (FindElement/s)
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-		
+
 		driver.get("http://demo.guru99.com/");
-		
+
+		String path = "/html/body/form/table/tbody/tr[5]/td[2]/input";
+
 		// Implicit (Not found element)
 		System.out.println("---- STEP 01 Start Implicit: " + new Date() + " ---- ");
 		try {
-			WebElement emailTextbox = driver.findElement(By.xpath("automation_testing"));
-			Assert.assertTrue(emailTextbox.isDisplayed());
-		} catch (NoSuchElementException ex) {
-			System.out.println("---- STEP 01 - NHẢY VÀO CATCH ---- ");
-			System.out.println(ex.getMessage());
-		}
-		System.out.println("---- STEP 01 End Implicit: " + new Date() + " ---- ");
-
-		// Explicit (Not found - tham số là web element)
-		System.out.println("---- STEP 01 Explicit (WebElement): " + new Date() + " ---- ");
-		try {
-			WebElement emailTextbox = explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("automation_testing"))));
-			Assert.assertTrue(emailTextbox.isDisplayed());
-		} catch (NoSuchElementException ex) {
-			System.out.println("---- STEP 02 - NHẢY VÀO CATCH ---- ");
-			System.out.println(ex.getMessage());
-		}
-		System.out.println("---- STEP 01 Explicit (WebElement): " + new Date() + " ---- ");
-		
-		// Explicit (Not found - tham số là by)
-		System.out.println("---- STEP 03 Explicit (By): " + new Date() + " ---- ");
-		try {
-			WebElement emailTextbox = explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("automation_testing")));
+			WebElement emailTextbox = driver.findElement(By.xpath("//input[@name='automation_testing']")); // ("automation_testing")
 			Assert.assertTrue(emailTextbox.isDisplayed());
 		} catch (Exception ex) {
 			System.out.println("---- STEP 02 - NHẢY VÀO CATCH ---- ");
 			System.out.println(ex.getMessage());
 		}
-		System.out.println("---- STEP 03 Explicit (By): " + new Date() + " ---- ");
+		System.out.println("---- STEP 01 End Implicit: " + new Date() + " ---- ");
+
+		// Explicit (Not found - tham số là web element)
+		System.out.println("---- STEP 02 Start Explicit (WebElement): " + new Date() + " ---- ");
+		try {
+			WebElement emailTextbox = explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@name='automation_testing']"))));
+			Assert.assertTrue(emailTextbox.isDisplayed());
+		} catch (Exception ex) {
+			System.out.println("---- STEP 02 - NHẢY VÀO CATCH ---- ");
+			System.out.println(ex.getMessage());
+		}
+		System.out.println("---- STEP 02 End Explicit (WebElement): " + new Date() + " ---- ");
+
+		// Explicit (Not found - tham số là by)
+		System.out.println("---- STEP 03 Start Explicit (By): " + new Date() + " ---- ");
+		try {
+			WebElement emailTextbox = explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='automation_testing']")));
+			Assert.assertTrue(emailTextbox.isDisplayed());
+		} catch (Exception ex) {
+			System.out.println("---- STEP 02 - NHẢY VÀO CATCH ---- ");
+			System.out.println(ex.getMessage());
+		}
+		System.out.println("---- STEP 03 End Explicit (By): " + new Date() + " ---- ");
 
 	}
 
