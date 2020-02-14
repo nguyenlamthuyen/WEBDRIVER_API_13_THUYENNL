@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Run All Suites">
+	<suite-files>
+		<suite-file path="runTestcasesSuite_01.xml" />
+		<suite-file path="runTestcasesSuite_02.xml" />
+	</suite-files>
+</suite> 

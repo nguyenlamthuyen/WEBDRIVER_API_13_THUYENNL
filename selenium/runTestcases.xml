@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Selenium WebDriver API" parallel="false">
+	<!-- <test name="TestNG Framework"> <classes> <class name="testng_framework.Part_I_Annotations" 
+		/> </classes> </test> -->
+
+	<!-- <test name="TestNG Framework"> <classes> <class name="testng_framework.Part_I_Annotations" 
+		/> <methods> <include name="TC_01" /> <include name="TC_02" /> </methods> 
+		</classes> </test> -->
+
+	<!-- <test name="TestNG Framework"> <groups> <run> <include name="shop"></include> 
+		</run> </groups> <classes> <class name="testng_framework.Part_II_Group" /> 
+		</classes> </test> -->
+
+<!-- 	<test name="Run testcase on CHROME">
+		<parameter name="browser" value="chrome"></parameter>
+		<classes>
+			<class name="testng_framework.Part_IV_Data_Provider" />
+		</classes>
+	</test> -->
+
+<!-- 	<test name="Run testcase on FIREFOX">
+		<parameter name="browser" value="firefox"></parameter>
+		<classes>
+			<class name="testng_framework.Part_IV_Data_Provider" />
+		</classes>
+	</test> -->
+	
+	<test name="TestNG Framework">
+		<classes>
+			<class name="testng_framework.Part_V_Loop" />
+		</classes>
+	</test>
+
+</suite> 

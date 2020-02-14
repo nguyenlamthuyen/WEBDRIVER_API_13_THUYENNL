@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Selenium WebDriver API" parallel="false">
+	<test name="TestNG Framework package">
+		<packages>
+			<package name="testng_framework" />
+		</packages>
+	</test>
+</suite> 
